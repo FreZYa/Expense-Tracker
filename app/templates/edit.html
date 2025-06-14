@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" class="shadow-lg m-10">
+        {% csrf_token %}
+        <div class="px-10 py-10 flex ">
+            <div class="mx-10">
+                <div class="mb-5">
+                    <label for="name" class="font-semibold">Name</label>
+                </div>
+                <div class="border p-1">
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="mx-10">
+                <div class="mb-5">
+                    <label for="name" class="font-semibold">Amount</label>
+                </div>
+                <div class="border p-1">
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="mx-10">
+                <div class="mb-5">
+                    <label for="name" class="font-semibold">Category</label>
+                </div>
+                <div class="border p-1">
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="mx-10 mt-10">
+                <button class="bg-blue-500 text-white px-5 py-2 rounded-md font-bold" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
