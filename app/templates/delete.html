@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Harcama Sil - Harcama Takipçisi{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto">
+    <!-- Confirmation Card -->
+    <div class="bg-white rounded-lg shadow-lg p-8">
+        <div class="text-center">
+            <!-- Warning Icon -->
+            <div class="mx-auto flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+                <i class="fas fa-exclamation-triangle text-2xl text-red-600"></i>
+            </div>
+            
+            <!-- Title -->
+            <h2 class="text-xl font-bold text-gray-900 mb-2">
+                Harcamayı Sil
+            </h2>
+            
+            <!-- Description -->
+            <p class="text-gray-600 mb-6">
+                Bu harcamayı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.
+            </p>
+            
+            <!-- Expense Details -->
+            {% if expense %}
+                <div class="bg-gray-50 rounded-lg p-4 mb-6 text-left">
+                    <h3 class="font-semibold text-gray-800 mb-2">Silinecek Harcama:</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Ad:</span>
+                            <span class="font-medium">{{ expense.name }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Tutar:</span>
+                            <span class="font-medium text-red-600">{{ expense.amount|floatformat:2 }} TL</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Kategori:</span>
+                            <span class="font-medium">{{ expense.get_category_display }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Tarih:</span>
+                            <span class="font-medium">{{ expense.date|date:"d/m/Y" }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <form method="post" class="flex-1">
+                    {% csrf_token %}
+                    <button type="submit" 
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center">
+                        <i class="fas fa-trash mr-2"></i>
+                        Evet, Sil
+                    </button>
+                </form>
+                
+                <a href="{% url 'index' %}" 
+                   class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center text-center">
+                    <i class="fas fa-times mr-2"></i>
+                    İptal Et
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to List -->
+    <div class="text-center mt-4">
+        <a href="{% url 'index' %}" 
+           class="text-gray-600 hover:text-blue-600 transition-colors text-sm flex items-center justify-center">
+            <i class="fas fa-arrow-left mr-1"></i>
+            Harcama listesine geri dön
+        </a>
+    </div>
+</div>
+{% endblock %} 
